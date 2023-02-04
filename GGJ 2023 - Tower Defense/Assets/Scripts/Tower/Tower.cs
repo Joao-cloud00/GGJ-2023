@@ -6,17 +6,37 @@ public abstract class Tower : MonoBehaviour
 {
     [SerializeField] protected float fireRate;
     [SerializeField] protected float distance;
+    [SerializeField] protected int price;
     [SerializeField] protected Bullet bullet;
     private float nextFire;
+    private bool canMove = false;
+    Vector2 cursorPos;
+
+    public int Price { get { return price; } set { price = value; } }
 
     private void Start()
     {
         nextFire = Time.deltaTime;
+        canMove = true;
     }
 
     private void Update()
     {
-        Fire();
+        if(canMove)
+        {
+            cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = new Vector2(cursorPos.x, cursorPos.y);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                canMove = false;
+            }
+        }
+
+        if(!canMove)
+        {
+            Fire();
+        }
     }
 
     private void Fire()

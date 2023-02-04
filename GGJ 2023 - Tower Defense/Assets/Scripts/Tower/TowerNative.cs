@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class TowerNative : Tower
 {
-
+    public TowerNative()
+    {
+        price = 100;
+    }
 }
