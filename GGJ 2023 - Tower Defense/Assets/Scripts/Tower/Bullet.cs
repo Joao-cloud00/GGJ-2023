@@ -5,13 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
-    [SerializeField] protected GameObject target;
+    public GameObject target;
     Rigidbody2D rb;
     Vector2 direction, rotation;
 
     private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Enemy");
         rb = GetComponent<Rigidbody2D>();
 
         direction = target.transform.position - transform.position;

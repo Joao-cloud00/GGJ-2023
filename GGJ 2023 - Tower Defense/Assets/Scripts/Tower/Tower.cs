@@ -45,7 +45,8 @@ public abstract class Tower : MonoBehaviour
     {
         if (Time.time > nextFire)
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            Bullet _bullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            _bullet.target = enemyTarget[1];
             nextFire = Time.time + fireRate;
         }
     }
