@@ -10,9 +10,11 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] protected Bullet bullet;
     private float nextFire;
     private bool canMove = false;
+    [SerializeField] private List<GameObject> enemyTarget = new List<GameObject>();
     Vector2 cursorPos;
 
     public int Price { get { return price; } set { price = value; } }
+    public List<GameObject> EnemyTarget { get { return EnemyTarget; } set { EnemyTarget = value;} }
 
     private void Start()
     {
@@ -33,7 +35,7 @@ public abstract class Tower : MonoBehaviour
             }
         }
 
-        if(!canMove)
+        if(!canMove && enemyTarget != null)
         {
             Fire();
         }
@@ -45,6 +47,22 @@ public abstract class Tower : MonoBehaviour
         {
             Instantiate(bullet, transform.position, Quaternion.identity);
             nextFire = Time.time + fireRate;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            enemyTarget.Add(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(enemyTarget.Contains(collision.gameObject))
+        {
+            enemyTarget.Remove(collision.gameObject);
         }
     }
 }
