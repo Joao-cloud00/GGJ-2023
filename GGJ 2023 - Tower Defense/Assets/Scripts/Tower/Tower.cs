@@ -18,7 +18,7 @@ public abstract class Tower : MonoBehaviour
 
     private void Start()
     {
-        nextFire = Time.deltaTime;
+        nextFire = Time.time;
         canMove = true;
     }
 
@@ -43,7 +43,7 @@ public abstract class Tower : MonoBehaviour
 
     private void Fire()
     {
-        if (Time.time > nextFire)
+        if (Time.time > nextFire && enemyTarget.Count > 1)
         {
             Bullet _bullet = Instantiate(bullet, transform.position, Quaternion.identity);
             _bullet.target = enemyTarget[1];
