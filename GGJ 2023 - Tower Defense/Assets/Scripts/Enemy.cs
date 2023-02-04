@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    
     SpriteRenderer _spriteRenderer;
-    public int MoveSpeed, _currentWaypointIndex;
-    Vector3 CurrentPointPosition, _lastPointPosition;
+    public int MoveSpeed;
+    [SerializeField] private int _currentWaypointIndex=0;
+    Vector3 CurrentPointPosition, _lastPointPosition, posInit;
+    public GameObject _posicaoInicial;
 
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        posInit = _posicaoInicial.transform.position;
+        transform.position = posInit;
+        
     }
 
     void Update()
     {
+        CurrentPointPosition = Waypoint.instance.GetWaypointPosition(_currentWaypointIndex);
         Move();
         Rotate();
 
@@ -22,6 +29,7 @@ public class Enemy : MonoBehaviour
         {
             UpdateCurrentPointIndex();
         }
+        
     }
 
     private void Move()
@@ -55,7 +63,7 @@ public class Enemy : MonoBehaviour
 
     private void UpdateCurrentPointIndex()
     {
-        int lastWaypointIndex = Waypoint.Points.Length - 1;
+        int lastWaypointIndex = Waypoint.instance.Points.Length - 1;
         if (_currentWaypointIndex < lastWaypointIndex)
         {
             _currentWaypointIndex++;
@@ -67,8 +75,10 @@ public class Enemy : MonoBehaviour
     }
     private void EndPointReached()
     {
-        OnEndReached?.Invoke(this);
+        _currentWaypointIndex += 1;
+        //OnEndReached?.Invoke(this);
         //_enemyHealth.ResetHealth();
-        ObjectPooler.ReturnToPool(gameObject);
+        //ObjectPooler.ReturnToPool(gameObject);
+        Debug.Log(Waypoint.instance.Points.Length);
     }
 }

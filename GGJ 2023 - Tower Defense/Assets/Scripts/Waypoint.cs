@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
+    static public Waypoint instance;
     [SerializeField] private Vector3[] points;
 
     public Vector3[] Points => points;
@@ -11,6 +12,19 @@ public class Waypoint : MonoBehaviour
 
     private Vector3 _currentPosition;
     private bool _gameStarted;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);   
+    }
 
     void Start()
     {
