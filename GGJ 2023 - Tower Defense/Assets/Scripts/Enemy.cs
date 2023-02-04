@@ -6,28 +6,52 @@ public class Enemy : MonoBehaviour
 {
     
     SpriteRenderer _spriteRenderer;
-    public int MoveSpeed;
-    [SerializeField] private int _currentWaypointIndex=0;
     Vector3 CurrentPointPosition, _lastPointPosition, posInit;
     public GameObject _posicaoInicial;
+    [SerializeField] private int _currentWaypointIndex=0;
+
+    [Header("Combate")]
+    public Transform healthBar; //barra verde
+    public GameObject healthBarObject; //Objeto pai das barras
+    public float health;
+    public int MoveSpeed, danoTOMADO;
+    public Waypoint nome;
+
+    private Vector3 healthBarScale; //tamanho da barra
+    private float healthPercent; //Percentual de vida para calculo do tamanho da barra
 
     void Start()
     {
+        healthBarScale = healthBar.localScale;
+        healthPercent = healthBarScale.x / health;
+
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        posInit = _posicaoInicial.transform.position;
-        transform.position = posInit;
+
+        // posInit = _posicaoInicial.transform.position;
+        // transform.position = posInit;
         
+    }
+
+    void UpdateHealthbar()
+    {
+        healthBarScale.x = healthPercent * health;
+        healthBar.localScale = healthBarScale;
     }
 
     void Update()
     {
-        CurrentPointPosition = Waypoint.instance.GetWaypointPosition(_currentWaypointIndex);
+        CurrentPointPosition = nome.GetWaypointPosition(_currentWaypointIndex);
         Move();
         Rotate();
+        Morte();
 
         if(CurrentPointPositionReached())
         {
             UpdateCurrentPointIndex();
+        }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            TakeDamage(danoTOMADO);
         }
         
     }
@@ -80,5 +104,18 @@ public class Enemy : MonoBehaviour
         //_enemyHealth.ResetHealth();
         //ObjectPooler.ReturnToPool(gameObject);
         Debug.Log(Waypoint.instance.Points.Length);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        UpdateHealthbar();
+    }
+    void Morte()
+    {
+        if (health<=0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

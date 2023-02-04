@@ -11,6 +11,8 @@ public class Spawner : MonoBehaviour
     [Header("Fixed Delay")]
     [SerializeField] private float delayBtwSpawns;
 
+    [SerializeField] private Waypoint waypointTeste;
+
     private float _spawnTimer;
     private int _enemiesSpawned;
 
@@ -37,7 +39,16 @@ public class Spawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
+
         GameObject newInstance = _pooler.GetInstanceFromPool();
-        newInstance.SetActive(true);
+        newInstance.GetComponent<Enemy>().nome = waypointTeste;
+        //newInstance.SetActive(true);
+        //GameObject newInstance = ObjectPool.SharedInstance.GetPooledObject();
+        if (newInstance != null)
+        {    
+            newInstance.transform.position = gameObject.transform.position;
+            newInstance.transform.rotation = gameObject.transform.rotation;
+            newInstance.SetActive(true); 
+        }
     }
 }

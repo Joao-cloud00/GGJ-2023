@@ -17,13 +17,13 @@ public class Waypoint : MonoBehaviour
     {
         if (instance == null)
         {
-            instance = this;
+           instance = this;
         }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);   
+        // else if (instance != this)
+        // {
+        //     Destroy(gameObject);
+        // }
+        // DontDestroyOnLoad(gameObject);   
     }
 
     void Start()
