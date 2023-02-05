@@ -6,7 +6,7 @@ public class ObjectPooler : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private int poolSize = 10;
-    private List<GameObject> _pool;
+    [SerializeField] private List<GameObject> _pool;
     private GameObject _poolContainer;
 
 
@@ -21,7 +21,9 @@ public class ObjectPooler : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            _pool.Add(CreateInstance());
+            GameObject newInstance = Instantiate(prefab);
+            _pool.Add(newInstance);
+            //_pool.Add(CreateInstance());
         }
     }
     private GameObject CreateInstance()

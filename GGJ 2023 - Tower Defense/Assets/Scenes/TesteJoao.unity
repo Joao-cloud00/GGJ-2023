@@ -482,6 +482,10 @@ PrefabInstance:
       propertyPath: wave.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: aa3eeb22b422a18419f923dc1fc67075, type: 2}
+    - target: {fileID: 4827129124264054367, guid: 7f3d125c9e8e5424f8d900431a722b7e, type: 3}
+      propertyPath: newInstance.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 7f3d125c9e8e5424f8d900431a722b7e, type: 3}
@@ -708,6 +712,10 @@ PrefabInstance:
       propertyPath: wave.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: aa3eeb22b422a18419f923dc1fc67075, type: 2}
+    - target: {fileID: 4827129124264054367, guid: 7f3d125c9e8e5424f8d900431a722b7e, type: 3}
+      propertyPath: newInstance.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 7f3d125c9e8e5424f8d900431a722b7e, type: 3}
@@ -987,6 +995,10 @@ PrefabInstance:
       propertyPath: wave.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: aa3eeb22b422a18419f923dc1fc67075, type: 2}
+    - target: {fileID: 4827129124264054367, guid: 7f3d125c9e8e5424f8d900431a722b7e, type: 3}
+      propertyPath: newInstance.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 7f3d125c9e8e5424f8d900431a722b7e, type: 3}
@@ -1088,6 +1100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wave: 0
   inGame: 0
+  botaoStart: {fileID: 2137145511}
 --- !u!1 &2137145511
 GameObject:
   m_ObjectHideFlags: 0

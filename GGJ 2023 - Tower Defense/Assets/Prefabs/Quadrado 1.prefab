@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4640513099762810482}
   m_Layer: 0
   m_Name: Quadrado 1
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,12 +99,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _posicaoInicial: {fileID: 4827129124264054360, guid: 7f3d125c9e8e5424f8d900431a722b7e, type: 3}
   _currentWaypointIndex: 0
+  vivo: 1
   healthBar: {fileID: 961259413706869801}
   healthBarObject: {fileID: 5612916587034111254}
   health: 10
   MoveSpeed: 1
-  danoTOMADO: 2
+  danoTOMADO: 5
   nome: {fileID: 0}
+  _spawner: {fileID: 0}
 --- !u!61 &4640513099762810482
 BoxCollider2D:
   m_ObjectHideFlags: 0

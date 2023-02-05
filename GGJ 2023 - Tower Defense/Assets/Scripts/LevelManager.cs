@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public int wave = 0;
+    public int wave = 0, numeroInimigos,tempoPiniciar;
     static public LevelManager instance;
     public bool inGame; //indica que esta rolando uma wave de inimigos 
                                     //(ativado/desativado por botao ou tempo)
     float tempoFinal;
+    [SerializeField] private GameObject botaoStart;
+    [SerializeField] Spawner[] spawners;
+
 
     private void Awake()
     {
@@ -23,13 +26,53 @@ public class LevelManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);   
     }
+    private void Update() 
+    {
+        //Debug.Log(numeroInimigos);
+        if(numeroInimigos==0 && inGame)
+        {
+            AumentarWave();
+        }
+    }
 
     public void ComecarWave() 
     {
+        for(int i=0; i< spawners.Length; i++)
+        {
+            numeroInimigos += spawners[i].enemyCount;
+        }
         inGame = true;
+        botaoStart.SetActive(false);
     }
+
     void AumentarWave()
     {
+        Enemy[] inimigos = Object.FindObjectsOfType<Enemy>(true);
+        Debug.Log("inimigosLength "+inimigos.Length);
+
+        // for(int i=0; i< spawners.Length; i++)
+        // {
+        //     spawners[i].objetoSpawn = 0;
+        //     spawners[i]._pool.Clear();
+        //     enemyCount = wave[LevelManager.instance.wave].enemies.Count;
+        // }
+        foreach(Spawner spwan in spawners)
+        {
+            spwan.objetoSpawn = 0;
+            spwan._pool.Clear();
+            spwan._enemiesSpawned = 0;
+            //spwan.enemyCount = spwan.wave[wave].enemies.Count;
+        }
+
+        foreach(Enemy enemy in inimigos)
+        {
+            Debug.Log("foreach");
+            Destroy(enemy.gameObject);
+            
+        } 
+        tempoFinal=0;
+        botaoStart.SetActive(true);
+        inGame = false;
         wave ++ ;
     }
 
@@ -40,12 +83,20 @@ public class LevelManager : MonoBehaviour
     }
     public void ComecarAutomaticamente()
     {
-        tempoFinal += Time.deltaTime;
-        if ((tempoFinal >= 30))
+        if( wave!= 0)
         {
-            inGame=true;
+            tempoFinal += Time.deltaTime;
+            if ((tempoFinal >= tempoPiniciar && inGame == false))
+            {
+                ComecarWave();
+            }            
         }
 
+
+    }
+    public void AcabouWave()
+    {
+        //if(Enemy.FindGameObjectWithTag)
     }
 
 

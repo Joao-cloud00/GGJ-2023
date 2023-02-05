@@ -9,13 +9,16 @@ public class Enemy : MonoBehaviour
     Vector3 CurrentPointPosition, _lastPointPosition, posInit;
     public GameObject _posicaoInicial;
     [SerializeField] private int _currentWaypointIndex=0;
-
+    
     [Header("Combate")]
     public Transform healthBar; //barra verde
     public GameObject healthBarObject; //Objeto pai das barras
     public float health;
     public int MoveSpeed, danoTOMADO;
+    public bool vivo = true;
+
     public Waypoint nome;
+    private Spawner _spawner;
 
     private Vector3 healthBarScale; //tamanho da barra
     private float healthPercent; //Percentual de vida para calculo do tamanho da barra
@@ -26,6 +29,7 @@ public class Enemy : MonoBehaviour
         healthPercent = healthBarScale.x / health;
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spawner = GetComponent<Spawner>();
 
         // posInit = _posicaoInicial.transform.position;
         // transform.position = posInit;
@@ -115,7 +119,26 @@ public class Enemy : MonoBehaviour
     {
         if (health<=0)
         {
-            Destroy(this.gameObject);
+            vivo = false;
+            //Destroy(this.gameObject);
         }
+    
     }
+
+    // private void OnDestroy() //remove inimigos mortos da lista para mudar uma bool
+    // {
+    //     for (int i = 0; i < _spawner._pool.Count; i++)
+    //     {
+    //         if (this.gameObject == _spawner._pool[i])
+    //         {
+    //             _spawner._pool.RemoveAt(i);
+    //             if (_spawner._pool.Count == 0)
+    //             {
+    //                 Debug.Log("zerado");
+    //                 //Instantiate(drop[0],gameObject.transform.position,Quaternion.identity);
+    //             }
+    //         }
+    //     }
+    // }
+
 }
