@@ -13,9 +13,11 @@ public class Enemy : MonoBehaviour
     [Header("Combate")]
     public Transform healthBar; //barra verde
     public GameObject healthBarObject; //Objeto pai das barras
-    public float health;
-    public int MoveSpeed, danoTOMADO;
-    public bool vivo = true;
+    public float health,atckSpeed;
+    public int MoveSpeed, danoTOMADO, dano, dinheiro;
+    public bool vivo = true, podeatk;
+    float tempoAtck;
+    
 
     public Waypoint nome;
     private Spawner _spawner;
@@ -40,6 +42,10 @@ public class Enemy : MonoBehaviour
     {
         healthBarScale.x = healthPercent * health;
         healthBar.localScale = healthBarScale;
+    }
+    private void FixedUpdate() 
+    {
+        CausouDano();
     }
 
     void Update()
@@ -79,6 +85,7 @@ public class Enemy : MonoBehaviour
 
     private bool CurrentPointPositionReached()
     {
+        Debug.Log("CurrentPointPositionReached ");
         float distanceToNextPointPosition = (transform.position - CurrentPointPosition).magnitude;
         if(distanceToNextPointPosition < 0.1f)
         {
@@ -103,11 +110,12 @@ public class Enemy : MonoBehaviour
     }
     private void EndPointReached()
     {
+        podeatk = true;
         _currentWaypointIndex += 1;
         //OnEndReached?.Invoke(this);
         //_enemyHealth.ResetHealth();
         //ObjectPooler.ReturnToPool(gameObject);
-        Debug.Log(Waypoint.instance.Points.Length);
+        //Debug.Log(Waypoint.instance.Points.Length);
     }
 
     public void TakeDamage(int damage)
@@ -119,10 +127,27 @@ public class Enemy : MonoBehaviour
     {
         if (health<=0)
         {
+            LevelManager.instance.saldoJogador += dinheiro;
             vivo = false;
             //Destroy(this.gameObject);
         }
     
+    }
+    void CausouDano()
+    {
+        
+        if(podeatk)
+        {
+            tempoAtck = tempoAtck + Time.deltaTime;
+            if(tempoAtck >= atckSpeed)
+            {
+                Debug.Log("Fez o dano");
+                tempoAtck=0;
+                LevelManager.instance.TomouDano(dano);
+            }
+        }
+
+
     }
 
     // private void OnDestroy() //remove inimigos mortos da lista para mudar uma bool

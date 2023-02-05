@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public int wave = 0, numeroInimigos,tempoPiniciar;
+    public int wave = 0, numeroInimigos,tempoPiniciar,vidaMaxJogador,saldoJogador,saldoInit;
     static public LevelManager instance;
     public bool inGame; //indica que esta rolando uma wave de inimigos 
                                     //(ativado/desativado por botao ou tempo)
@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        saldoJogador = saldoInit;
         if (instance == null)
         {
            instance = this;
@@ -24,7 +25,8 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);   
+        DontDestroyOnLoad(gameObject);
+
     }
     private void Update() 
     {
@@ -32,6 +34,29 @@ public class LevelManager : MonoBehaviour
         if(numeroInimigos==0 && inGame)
         {
             AumentarWave();
+        }
+        Vitoria();
+        Morte();
+    }
+    public void TomouDano(int dano)
+    {
+        vidaMaxJogador-= dano;
+    }
+    void Morte()
+    {
+        if(vidaMaxJogador<=0)
+        {
+            Debug.Log("Morreu");
+        }
+    }
+
+
+    void Vitoria()
+    {
+
+        if(wave >= spawners[0].wave.Count)
+        {
+            Debug.Log("Vitoria");
         }
     }
 

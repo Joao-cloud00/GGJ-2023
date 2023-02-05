@@ -102,8 +102,13 @@ MonoBehaviour:
   healthBar: {fileID: 961259413706869801}
   healthBarObject: {fileID: 5612916587034111254}
   health: 10
+  atckSpeed: 1
   MoveSpeed: 1
   danoTOMADO: 2
+  dano: 2
+  dinheiro: 20
+  vivo: 1
+  podeatk: 0
   nome: {fileID: 0}
 --- !u!61 &4640513099762810482
 BoxCollider2D:

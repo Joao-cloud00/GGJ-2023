@@ -99,14 +99,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _posicaoInicial: {fileID: 4827129124264054360, guid: 7f3d125c9e8e5424f8d900431a722b7e, type: 3}
   _currentWaypointIndex: 0
-  vivo: 1
   healthBar: {fileID: 961259413706869801}
   healthBarObject: {fileID: 5612916587034111254}
   health: 10
+  atckSpeed: 1
   MoveSpeed: 1
   danoTOMADO: 5
+  dano: 5
+  dinheiro: 30
+  vivo: 1
+  podeatk: 0
   nome: {fileID: 0}
-  _spawner: {fileID: 0}
 --- !u!61 &4640513099762810482
 BoxCollider2D:
   m_ObjectHideFlags: 0
