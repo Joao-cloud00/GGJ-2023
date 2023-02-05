@@ -103,7 +103,7 @@ MonoBehaviour:
   healthBarObject: {fileID: 5612916587034111254}
   health: 10
   atckSpeed: 1
-  MoveSpeed: 1
+  MoveSpeed: 2
   danoTOMADO: 2
   dano: 2
   dinheiro: 20
