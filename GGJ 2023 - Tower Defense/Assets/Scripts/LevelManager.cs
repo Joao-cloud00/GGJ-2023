@@ -1,18 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int wave = 0;
+    static public LevelManager instance;
+    public bool inGame; //indica que esta rolando uma wave de inimigos 
+                                    //(ativado/desativado por botao ou tempo)
+    float tempoFinal;
+
+    private void Awake()
     {
-        
+        if (instance == null)
+        {
+           instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);   
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ComecarWave() 
     {
+        inGame = true;
+    }
+    void AumentarWave()
+    {
+        wave ++ ;
+    }
+
+    void FixedUpdate()
+    {
+        ComecarAutomaticamente();
         
     }
+    public void ComecarAutomaticamente()
+    {
+        tempoFinal += Time.deltaTime;
+        if ((tempoFinal >= 30))
+        {
+            inGame=true;
+        }
+
+    }
+
+
 }

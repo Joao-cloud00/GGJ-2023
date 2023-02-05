@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private int enemyCount = 10;
+    private int enemyCount;
     [SerializeField] private GameObject testGO;
 
     [Header("Fixed Delay")]
@@ -13,34 +13,45 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] private Waypoint waypointTeste;
 
+    public List<Waves> wave;
     private float _spawnTimer;
-    private int _enemiesSpawned;
+    private int _enemiesSpawned, objetoSpawn; //objetoSpawn precisa ser zerado 
+                                                    //ao inicio de cada wave[]
 
-    private ObjectPooler _pooler;
+    //private ObjectPooler _pooler;
 
     private void Start()
     {
-        _pooler = GetComponent<ObjectPooler>();
+        enemyCount = wave[LevelManager.instance.wave].enemies.Count;
+        //_pooler = GetComponent<ObjectPooler>();
     }
 
     private void Update()
     {
-        _spawnTimer -= Time.deltaTime;
-        if (_spawnTimer < 0)
+        Debug.Log(wave[LevelManager.instance.wave].enemies.Count);
+        Debug.Log(wave[LevelManager.instance.wave]);
+        if(LevelManager.instance.inGame)
         {
-            _spawnTimer = delayBtwSpawns;
-            if (_enemiesSpawned < enemyCount)
+            _spawnTimer -= Time.deltaTime;
+            if (_spawnTimer < 0)
             {
-                _enemiesSpawned++;
-                SpawnEnemy();
+                _spawnTimer = delayBtwSpawns;
+                if (_enemiesSpawned < enemyCount)
+                {
+                    _enemiesSpawned++;
+                    SpawnEnemy();
+                }
             }
         }
+
     }
+
 
     private void SpawnEnemy()
     {
 
-        GameObject newInstance = _pooler.GetInstanceFromPool();
+        GameObject newInstance = Instantiate(wave[LevelManager.instance.wave].enemies[objetoSpawn]);
+        //GameObject newInstance = _pooler.GetInstanceFromPool();
         newInstance.GetComponent<Enemy>().nome = waypointTeste;
         //newInstance.SetActive(true);
         //GameObject newInstance = ObjectPool.SharedInstance.GetPooledObject();
@@ -50,5 +61,7 @@ public class Spawner : MonoBehaviour
             newInstance.transform.rotation = gameObject.transform.rotation;
             newInstance.SetActive(true); 
         }
+        objetoSpawn++;
     }
+
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4827129124264054365}
   - component: {fileID: 4827129124264054366}
   - component: {fileID: 4827129124264054367}
-  - component: {fileID: 4827129124264054364}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -61,21 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3efd35bda91e1f44fa7fb04b0b96f07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCount: 5
   testGO: {fileID: 4681164240406284048, guid: d4519c75c7971f24ab4a321fc152bbb1, type: 3}
   delayBtwSpawns: 1
   waypointTeste: {fileID: 4827129124264054366}
---- !u!114 &4827129124264054364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4827129124264054360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d0094528f0c1464199b025b1b28b450, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 4681164240406284048, guid: d4519c75c7971f24ab4a321fc152bbb1, type: 3}
-  poolSize: 10
+  wave: {fileID: 0}
