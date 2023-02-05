@@ -13,6 +13,8 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] private List<GameObject> enemyTarget = new List<GameObject>();
     Vector2 cursorPos;
     [SerializeField] protected CircleCollider2D myCollider;
+    [SerializeField] private Transform rangeSprite;
+    [SerializeField] private GameObject child;
 
     public int Price { get { return price; } set { price = value; } }
     public List<GameObject> EnemyTarget { get { return EnemyTarget; } set { EnemyTarget = value;} }
@@ -30,8 +32,12 @@ public abstract class Tower : MonoBehaviour
 
     private void Update()
     {
-        if(canMove)
+        float sizeImgRadius = myCollider.radius * 11;
+        rangeSprite.localScale = new Vector3 (sizeImgRadius, sizeImgRadius, 0);
+
+        if (canMove)
         {
+            child.SetActive(true);
             cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector2(cursorPos.x, cursorPos.y);
 
@@ -43,6 +49,7 @@ public abstract class Tower : MonoBehaviour
 
         if(!canMove && enemyTarget != null)
         {
+            //child.SetActive(false);
             Fire();
         }
     }
@@ -76,5 +83,15 @@ public abstract class Tower : MonoBehaviour
     protected void SetColliderSize(float size)
     {
         myCollider.radius = size;
+    }
+
+    private void OnMouseExit()
+    {
+        child.SetActive(false);
+    }
+
+    private void OnMouseDown()
+    {
+        child.SetActive(true);
     }
 }
