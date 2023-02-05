@@ -8,4 +8,9 @@ public class TowerNative : Tower
     {
         price = 100;
     }
+
+    private void Awake()
+    {
+        SetColliderSize(5);
+    }
 }

@@ -103,6 +103,7 @@ MonoBehaviour:
   bullet: {fileID: 5954201684417181820, guid: 812a5dffae58b9a41b9d413d95a53cc6, type: 3}
   enemyTarget:
   - {fileID: 0}
+  myCollider: {fileID: 358149390975388982}
 --- !u!58 &358149390975388982
 CircleCollider2D:
   m_ObjectHideFlags: 0

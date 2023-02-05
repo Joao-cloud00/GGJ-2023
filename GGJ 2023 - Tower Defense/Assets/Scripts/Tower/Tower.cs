@@ -12,9 +12,15 @@ public abstract class Tower : MonoBehaviour
     private bool canMove = false;
     [SerializeField] private List<GameObject> enemyTarget = new List<GameObject>();
     Vector2 cursorPos;
+    [SerializeField] protected CircleCollider2D myCollider;
 
     public int Price { get { return price; } set { price = value; } }
     public List<GameObject> EnemyTarget { get { return EnemyTarget; } set { EnemyTarget = value;} }
+
+    private void Awake()
+    {
+        myCollider = GetComponent<CircleCollider2D>();    
+    }
 
     private void Start()
     {
@@ -65,5 +71,10 @@ public abstract class Tower : MonoBehaviour
         {
             enemyTarget.Remove(collision.gameObject);
         }
+    }
+
+    protected void SetColliderSize(float size)
+    {
+        myCollider.radius = size;
     }
 }
