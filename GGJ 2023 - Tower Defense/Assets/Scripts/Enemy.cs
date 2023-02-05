@@ -121,6 +121,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Debug.Log("Inimigo toma dano");
         UpdateHealthbar();
     }
     void Morte()

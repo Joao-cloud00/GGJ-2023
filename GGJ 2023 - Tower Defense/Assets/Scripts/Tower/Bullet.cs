@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public GameObject target;
     Rigidbody2D rb;
     Vector2 direction, rotation;
+    public int dano;
 
     private void Start()
     {
@@ -29,7 +30,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "enemy")
+        {
+            Enemy Outro = collision.gameObject.GetComponent<Enemy>();
+            Outro.TakeDamage(dano);
+            //collision.gameObject.TakeDamage(dano);
             Destroy(gameObject);
+            //Destroy(collision.gameObject);
+        }
+            
     }
 }

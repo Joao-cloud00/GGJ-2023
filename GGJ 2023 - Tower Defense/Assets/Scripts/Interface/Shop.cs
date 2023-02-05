@@ -16,7 +16,7 @@ public class Shop : MonoBehaviour
     {
         if(manager.Money >= nativeTower.Price)
         {
-            manager.Money -= nativeTower.Price;
+            LevelManager.instance.saldoJogador -= nativeTower.Price;
             Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Instantiate(nativeTower, new Vector2(cursorPos.x, cursorPos.y), Quaternion.identity);
         }

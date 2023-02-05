@@ -13,6 +13,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject botaoStart;
     [SerializeField] Spawner[] spawners;
 
+    public Text txtVida;
+    public Text txtDinheiro;
+
 
     private void Awake()
     {
@@ -30,6 +33,8 @@ public class LevelManager : MonoBehaviour
     }
     private void Update() 
     {
+        txtDinheiro.text = saldoJogador.ToString();
+        txtVida.text = vidaMaxJogador.ToString();
         //Debug.Log(numeroInimigos);
         if(numeroInimigos==0 && inGame)
         {
@@ -38,10 +43,13 @@ public class LevelManager : MonoBehaviour
         Vitoria();
         Morte();
     }
+
     public void TomouDano(int dano)
     {
         vidaMaxJogador-= dano;
+        
     }
+
     void Morte()
     {
         if(vidaMaxJogador<=0)

@@ -107,6 +107,7 @@ MonoBehaviour:
   myCollider: {fileID: 358149390975388982}
   rangeSprite: {fileID: 1237204812625240198}
   child: {fileID: 6578786043167964872}
+  damg: 2
 --- !u!58 &358149390975388982
 CircleCollider2D:
   m_ObjectHideFlags: 0

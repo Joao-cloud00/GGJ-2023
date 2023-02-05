@@ -15,6 +15,7 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] protected CircleCollider2D myCollider;
     [SerializeField] private Transform rangeSprite;
     [SerializeField] private GameObject child;
+    public int damg;
 
     public int Price { get { return price; } set { price = value; } }
     public List<GameObject> EnemyTarget { get { return EnemyTarget; } set { EnemyTarget = value;} }
@@ -61,12 +62,13 @@ public abstract class Tower : MonoBehaviour
             Bullet _bullet = Instantiate(bullet, transform.position, Quaternion.identity);
             _bullet.target = enemyTarget[1];
             nextFire = Time.time + fireRate;
+            _bullet.dano = damg;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Enemy")
+        if(collision.gameObject.tag == "enemy")
         {
             enemyTarget.Add(collision.gameObject);
         }
