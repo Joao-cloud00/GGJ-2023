@@ -78,7 +78,7 @@ public class LevelManager : MonoBehaviour
         botaoStart.SetActive(false);
     }
 
-    void AumentarWave()
+    public void AumentarWave()
     {
         Enemy[] inimigos = Object.FindObjectsOfType<Enemy>(true);
         Debug.Log("inimigosLength "+inimigos.Length);

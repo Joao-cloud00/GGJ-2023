@@ -11,6 +11,6 @@ public class TowerNative : Tower
 
     private void Awake()
     {
-        SetColliderSize(3);
+        SetColliderSize(1);
     }
 }

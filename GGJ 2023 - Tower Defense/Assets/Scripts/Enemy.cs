@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     Vector3 CurrentPointPosition, _lastPointPosition, posInit;
     public GameObject _posicaoInicial;
     [SerializeField] private int _currentWaypointIndex=0;
+    [SerializeField] Spawner[] spawners;
     
     [Header("Combate")]
     public Transform healthBar; //barra verde
@@ -18,7 +19,7 @@ public class Enemy : MonoBehaviour
     public bool vivo = true, podeatk;
     float tempoAtck;
     
-
+    public int numeroInimigos;
     public Waypoint nome;
     private Spawner _spawner;
 
@@ -43,13 +44,11 @@ public class Enemy : MonoBehaviour
         healthBarScale.x = healthPercent * health;
         healthBar.localScale = healthBarScale;
     }
+
     private void FixedUpdate() 
     {
         CausouDano();
-    }
 
-    void Update()
-    {
         CurrentPointPosition = nome.GetWaypointPosition(_currentWaypointIndex);
         Move();
         Rotate();
@@ -59,12 +58,31 @@ public class Enemy : MonoBehaviour
         {
             UpdateCurrentPointIndex();
         }
+
         if(Input.GetKeyDown(KeyCode.P))
         {
             TakeDamage(danoTOMADO);
         }
         
     }
+
+    // void Update()
+    // {
+    //     CurrentPointPosition = nome.GetWaypointPosition(_currentWaypointIndex);
+    //     Move();
+    //     Rotate();
+    //     Morte();
+
+    //     if(CurrentPointPositionReached())
+    //     {
+    //         UpdateCurrentPointIndex();
+    //     }
+    //     if(Input.GetKeyDown(KeyCode.P))
+    //     {
+    //         TakeDamage(danoTOMADO);
+    //     }
+        
+    // }
 
     private void Move()
     {
@@ -106,10 +124,16 @@ public class Enemy : MonoBehaviour
         else
         {
             EndPointReached();
+            // if(tempoAtck == 0)
+            // {
+            //   gameObject.SetActive(false);  
+            // }
+            
         }
     }
     private void EndPointReached()
     {
+        Debug.Log("FIM DE ROTA!");
         podeatk = true;
         _currentWaypointIndex += 1;
         //OnEndReached?.Invoke(this);
@@ -130,7 +154,6 @@ public class Enemy : MonoBehaviour
         {
             LevelManager.instance.saldoJogador += dinheiro;
             vivo = false;
-            //Destroy(this.gameObject);
         }
     
     }
@@ -143,8 +166,8 @@ public class Enemy : MonoBehaviour
             if(tempoAtck >= atckSpeed)
             {
                 Debug.Log("Fez o dano");
-                tempoAtck=0;
                 LevelManager.instance.TomouDano(dano);
+                tempoAtck=0;
             }
         }
 
